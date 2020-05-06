@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 import debounce from "lodash/debounce";
 import nbaLogo from "../../../../assets/images/nba.png";
 import "./nbaPlayers.css";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const playersData = [
   {
@@ -103,7 +105,27 @@ const playersData = [
   },
 ];
 
+const useStyles = makeStyles((theme) => ({
+  playersBoxContainer: {
+    margin: "10px 0",
+    overflowY: "auto",
+    display: "flex",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      height: "300px",
+    },
+    [theme.breakpoints.up("md")]: {
+      height: "100%",
+    },
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
+
 const NbaPlayers = () => {
+  const classes = useStyles();
   const [players, setBenchPlayers] = useState(playersData);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -172,7 +194,7 @@ const NbaPlayers = () => {
     const { name, image } = player;
     return (
       <Fragment>
-        <Avatar alt={name} src={image || nbaLogo} />
+        <Avatar alt={name} src={image || nbaLogo} className={classes.large} />
         <span>{name}</span>
         <Button
           color={bench ? "primary" : "secondary"}
@@ -193,7 +215,7 @@ const NbaPlayers = () => {
     return (
       <Fragment>
         {animatedPlayers.map(({ item, key, props }, index) => (
-          <Grid item xs={3}>
+          <Grid item xs={4} sm={3} lg={2}>
             <animated.div key={key} style={props}>
               <PlayerBox
                 player={item}
@@ -209,14 +231,24 @@ const NbaPlayers = () => {
 
   return (
     <Grid container xs={12}>
-      <Grid item xs={12}>
-        <h1>Make the team of your dream</h1>
+      <Grid item xs={12} style={{ textAlign: "center", marginBottom: "20px" }}>
+        <Typography variant="h4">Make the team of your dream</Typography>
       </Grid>
       <Grid container sm={12} md={6}>
-        {renderPlayers("BENCH")}
+        <Typography variant="h5" style={{ width: "100%" }}>
+          My favorites players
+        </Typography>
+        <div style={{ width: "100%" }} className={classes.playersBoxContainer}>
+          {renderPlayers("BENCH")}
+        </div>
       </Grid>
       <Grid container sm={12} md={6}>
-        {renderPlayers("SELECTED")}
+        <Typography variant="h5" style={{ width: "100%" }}>
+          The Dream Team
+        </Typography>
+        <div style={{ width: "100%" }} className={classes.playersBoxContainer}>
+          {renderPlayers("SELECTED")}
+        </div>
       </Grid>
     </Grid>
   );
