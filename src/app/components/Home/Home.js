@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 
 const Home = () => (
   <Container maxWidth="md" style={{ textAlign: "center" }}>
-    <Typography variant="h2">Welcome to Mariano Queirel's Site</Typography>
+    <Typography variant="h2">Welcome</Typography>
     <Typography variant="h5">Software Front End Developer</Typography>
     <Typography variant="body1" gutterBottom>
       I love our amazing industry. I’ve been working in small and big projects

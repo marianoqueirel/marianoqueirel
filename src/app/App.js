@@ -30,6 +30,9 @@ const App = () => {
         <Route path={home.path}>
           <Home />
         </Route>
+        <Route path="*">
+          <Home />
+        </Route>
       </Switch>
     </Router>
   );
