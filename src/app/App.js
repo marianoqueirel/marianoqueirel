@@ -5,6 +5,8 @@ import "./App.css";
 import AppBar from "./components/AppBar";
 import Home from "./components/Home";
 import Playground from "./components/Playground";
+import Resume from "./components/Resume";
+import SiteDoc from "./components/SiteDoc";
 
 const App = () => {
   const { home, playground, resume, siteDescription } = routes;
@@ -13,19 +15,13 @@ const App = () => {
       <AppBar />
       <Switch>
         <Route path={resume.path}>
-          <h2>{resume.name}</h2>
+          <Resume />
         </Route>
         <Route path={playground.path}>
           <Playground />
         </Route>
         <Route path={siteDescription.path}>
-          <h2>Site RepO: github/marianoqueirel</h2>
-          <h2>Responsive </h2>
-          <h2>Client side rendering </h2>
-          <h2>
-            Libraries used: - redux, redux-saga, material-ui, react-spring
-          </h2>
-          <h2>create react app </h2>
+          <SiteDoc />
         </Route>
         <Route path={home.path}>
           <Home />
