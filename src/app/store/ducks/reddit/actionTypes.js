@@ -1,0 +1,2 @@
+export const GET_REDDIT_POSTS = "GET_REDDIT_POSTS";
+export const SET_REDDIT_POSTS = "SET_REDDIT_POSTS";

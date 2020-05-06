@@ -1,40 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import routes from "./routes/routes";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { Provider } from "react-redux";
+import store from "./store";
+import Router from "./Router";
 import "./App.css";
-import AppBar from "./components/AppBar";
-import Home from "./components/Home";
-import Playground from "./components/Playground";
-import Resume from "./components/Resume";
-import SiteDoc from "./components/SiteDoc";
 
-const App = () => {
-  const { home, playground, resume, siteDescription } = routes;
-  return (
-    <Router>
-      <AppBar />
-      <Switch>
-        <Route path={resume.path}>
-          <Resume />
-        </Route>
-        <Route path={playground.path}>
-          <Playground />
-        </Route>
-        <Route path={siteDescription.path}>
-          <SiteDoc />
-        </Route>
-        <Route path={home.path}>
-          <Home />
-        </Route>
-        <Route path="/reddit">
-          <Home />
-        </Route>
-        <Route path="*">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <CssBaseline />
+    <Router />
+  </Provider>
+);
 
 export default App;
