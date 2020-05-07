@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
@@ -12,7 +12,9 @@ import Button from "@material-ui/core/Button";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MessageIcon from "@material-ui/icons/Message";
-const PostCard = ({ post }) => {
+import { animated, useTransition } from "react-spring";
+
+const PostCard = ({ post, onDismiss }) => {
   return (
     <Card style={{ padding: "20px" }}>
       <div
@@ -66,13 +68,16 @@ const PostCard = ({ post }) => {
         </Typography>
       </Grid>
       <CardActions disableSpacing style={{ justifyContent: "space-between" }}>
-        <Button
-          variant="contained"
-          color="secondary"
-          startIcon={<DeleteIcon />}
-        >
-          Delete
-        </Button>
+        <div onClick={() => onDismiss(post.id)}>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+          >
+            Dismiss Post
+          </Button>
+        </div>
+
         <Badge
           color="secondary"
           anchorOrigin={{
@@ -89,7 +94,7 @@ const PostCard = ({ post }) => {
 };
 
 const Reddit = () => {
-  const [drawer, setDrawer] = React.useState(false);
+  const [drawer, setDrawer] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -103,14 +108,42 @@ const Reddit = () => {
     setDrawer(open);
   };
 
+  const [posts, setPosts] = useState([
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+  ]);
+
+  const handleDismissPost = (id) => {
+    const index = posts.findIndex((post) => post.id === id);
+    const filteredPosts = [
+      ...posts.slice(0, index),
+      ...posts.slice(index + 1, posts.length),
+    ];
+
+    setPosts(filteredPosts);
+  };
+
+  const animatedPosts = useTransition(posts, (item) => item.id, {
+    config: { duration: 300 },
+    from: { opacity: 0, transform: "translate3d(0%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(-100%,0,0)" },
+  });
+
   const renderRedditList = () => (
     <Fragment>
       <div style={{ height: "5%", textAlign: "center" }}>Header</div>
-      <div style={{ height: "90%", backgroundColor: "red", overflowY: "auto" }}>
-        {["", "", "", ""].map((post) => {
+      <div
+        style={{ height: "90%", backgroundColor: "blue", overflowY: "auto" }}
+      >
+        {animatedPosts.map(({ item, props, key }) => {
           return (
-            <Grid xs={12}>
-              <PostCard post={post} />
+            <Grid xs={12} key={key}>
+              <animated.div key={key} style={props}>
+                <PostCard post={item} onDismiss={handleDismissPost} />
+              </animated.div>
             </Grid>
           );
         })}
