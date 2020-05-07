@@ -13,6 +13,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const PostCard = ({ post }) => {
   const [expanded, setExpanded] = React.useState(false);
@@ -115,15 +116,15 @@ const Reddit = () => {
           open={drawer}
           onClose={toggleDrawer(false)}
           onOpen={toggleDrawer(true)}
-          style={{ width: "250px" }}
         >
-          <div style={{ width: "250px" }}>{renderRedditList()}</div>
+          <div style={{ width: "250px", height: "100%" }}>
+            {renderRedditList()}
+          </div>
         </SwipeableDrawer>
       </Hidden>
       <Hidden smDown>
         <Grid
-          xs={12}
-          sm={4}
+          md={4}
           style={{
             backgroundColor: "green",
             height: "100%",
@@ -138,9 +139,20 @@ const Reddit = () => {
         md={8}
         style={{ backgroundColor: "red", justifyContent: "center" }}
       >
-        <Typography variant="h1" component="h2">
-          h1. Heading
-        </Typography>
+        <Hidden mdUp>
+          <Grid
+            container
+            xs={1}
+            alignItems="start"
+            justify="center"
+            style={{ marginTop: "1rem" }}
+          >
+            <MenuIcon fontSize="large" onClick={() => setDrawer(true)} />
+          </Grid>
+        </Hidden>
+        <Grid container xs={11} md={12}>
+          <Typography variant="h2">Post Content</Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
