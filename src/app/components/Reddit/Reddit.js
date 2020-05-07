@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 const PostCard = ({ post }) => {
   const [expanded, setExpanded] = React.useState(false);
@@ -77,42 +78,70 @@ const PostCard = ({ post }) => {
 };
 
 const Reddit = () => {
+  const [drawer, setDrawer] = React.useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawer(open);
+  };
+
+  const renderRedditList = () => (
+    <Fragment>
+      <div style={{ height: "5%", textAlign: "center" }}>Header</div>
+      <div style={{ height: "90%", backgroundColor: "red", overflowY: "auto" }}>
+        {["", "", "", ""].map((post) => {
+          return (
+            <Grid xs={12}>
+              <PostCard post={post} />
+            </Grid>
+          );
+        })}
+      </div>
+      <div style={{ height: "5%", textAlign: "center" }}>Footer</div>
+    </Fragment>
+  );
+
   return (
     <Grid container style={{ height: "100vh" }}>
-      <Grid
-        xs={12}
-        sm={4}
-        style={{
-          backgroundColor: "green",
-          height: "100%",
-        }}
-      >
-        <div style={{ height: "5%", textAlign: "center" }}>Header</div>
-        <div
-          style={{ height: "90%", backgroundColor: "red", overflowY: "auto" }}
+      <Hidden mdUp>
+        <SwipeableDrawer
+          open={drawer}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+          style={{ width: "250px" }}
         >
-          {["", "", "", ""].map((post) => {
-            return (
-              <Grid xs={12}>
-                <PostCard post={post} />
-              </Grid>
-            );
-          })}
-        </div>
-        <div style={{ height: "5%", textAlign: "center" }}>Footer</div>
-      </Grid>
-
-      <Hidden xsDown>
+          <div style={{ width: "250px" }}>{renderRedditList()}</div>
+        </SwipeableDrawer>
+      </Hidden>
+      <Hidden smDown>
         <Grid
-          container
-          sm={8}
-          style={{ backgroundColor: "red", justifyContent: "center" }}
+          xs={12}
+          sm={4}
+          style={{
+            backgroundColor: "green",
+            height: "100%",
+          }}
         >
-          <Typography variant="h1" component="h2">
-            h1. Heading
-          </Typography>
+          {renderRedditList()}
         </Grid>
       </Hidden>
+      <Grid
+        container
+        sm={12}
+        md={8}
+        style={{ backgroundColor: "red", justifyContent: "center" }}
+      >
+        <Typography variant="h1" component="h2">
+          h1. Heading
+        </Typography>
+      </Grid>
     </Grid>
   );
 };
