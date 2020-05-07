@@ -53,26 +53,18 @@ const PostCard = ({ post }) => {
           </Typography>
         </div>
       </div>
-
-      <CardContent>
-        <div style={{ display: "flex" }}>
-          <img
-            alt="text "
-            style={{ width: "10rem", height: "8rem" }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS1XpsQ65vbbKb4wSxXM-x3hpVaD4AREqrrJcRkc9Cj3I3Y_8gw&usqp=CAU"
-          />
-          <Typography
-            noWrap
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
-        </div>
-      </CardContent>
+      <Grid container>
+        <img
+          alt="text "
+          style={{ width: "100%", height: "100%" }}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS1XpsQ65vbbKb4wSxXM-x3hpVaD4AREqrrJcRkc9Cj3I3Y_8gw&usqp=CAU"
+        />
+        <Typography noWrap variant="h6" color="textSecondary" component="p">
+          This impressive paella is a perfect party dish and a fun meal to cook
+          together with your guests. Add 1 cup of frozen peas along with the
+          mussels, if you like.
+        </Typography>
+      </Grid>
       <CardActions disableSpacing style={{ justifyContent: "space-between" }}>
         <Button
           variant="contained"
@@ -135,7 +127,7 @@ const Reddit = () => {
           onClose={toggleDrawer(false)}
           onOpen={toggleDrawer(true)}
         >
-          <div style={{ width: "250px", height: "100%" }}>
+          <div style={{ width: "300px", height: "100%" }}>
             {renderRedditList()}
           </div>
         </SwipeableDrawer>
@@ -143,6 +135,7 @@ const Reddit = () => {
       <Hidden smDown>
         <Grid
           md={4}
+          lg={3}
           style={{
             backgroundColor: "green",
             height: "100%",
@@ -155,6 +148,7 @@ const Reddit = () => {
         container
         sm={12}
         md={8}
+        lg={9}
         style={{ backgroundColor: "red", justifyContent: "center" }}
       >
         <Hidden mdUp>
