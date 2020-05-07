@@ -3,77 +3,95 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+import Avatar from "@material-ui/core/Avatar";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import Button from "@material-ui/core/Button";
+import Badge from "@material-ui/core/Badge";
+import DeleteIcon from "@material-ui/icons/Delete";
+import MessageIcon from "@material-ui/icons/Message";
 const PostCard = ({ post }) => {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   return (
-    <Card>
-      <CardHeader
-        avatar={null}
-        action={null}
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardContent>
-        <CardMedia
-          image="/static/images/cards/paella.jpg"
-          title="Paella dish"
-        />
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
+    <Card style={{ padding: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex" }}>
+          <Avatar
+            style={{
+              backgroundColor: "red",
+              width: "1rem",
+              height: "1rem",
+              marginRight: "1rem",
+            }}
+          >
+            {" "}
+          </Avatar>
+          <Typography
+            noWrap
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            Manu Ginolibi
           </Typography>
+        </div>
+        <div>
+          <Typography
+            noWrap
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            9 hours ago
+          </Typography>
+        </div>
+      </div>
 
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
+      <CardContent>
+        <div style={{ display: "flex" }}>
+          <img
+            alt="text "
+            style={{ width: "10rem", height: "8rem" }}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS1XpsQ65vbbKb4wSxXM-x3hpVaD4AREqrrJcRkc9Cj3I3Y_8gw&usqp=CAU"
+          />
+          <Typography
+            noWrap
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            This impressive paella is a perfect party dish and a fun meal to
+            cook together with your guests. Add 1 cup of frozen peas along with
+            the mussels, if you like.
           </Typography>
-        </CardContent>
-      </Collapse>
+        </div>
+      </CardContent>
+      <CardActions disableSpacing style={{ justifyContent: "space-between" }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+        <Badge
+          color="secondary"
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          badgeContent={99}
+        >
+          <MessageIcon />
+        </Badge>
+      </CardActions>
     </Card>
   );
 };
