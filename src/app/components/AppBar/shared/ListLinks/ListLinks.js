@@ -49,6 +49,7 @@ const ListLinks = (props) => {
         to={routes.siteDescription.path}
         primary={routes.siteDescription.name}
       />
+      <ListItemLink to={routes.reddit.path} primary={routes.reddit.name} />
     </List>
   );
 };

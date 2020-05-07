@@ -14,8 +14,13 @@ const playground = {
 };
 
 const siteDescription = {
-  name: "Site Description",
+  name: "Site Doc",
   path: "/siteDescription",
 };
 
-export default { home, resume, playground, siteDescription };
+const reddit = {
+  name: "Deviget (Reddit)",
+  path: "/reddit",
+};
+
+export default { home, resume, playground, siteDescription, reddit };

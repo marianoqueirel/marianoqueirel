@@ -4,11 +4,12 @@ import AppBar from "../components/AppBar";
 import Home from "../components/Home";
 import Playground from "../components/Playground";
 import Resume from "../components/Resume";
+import Reddit from "../components/Reddit";
 import SiteDoc from "../components/SiteDoc";
 import routes from "../routes/routes";
 
 const Router = () => {
-  const { home, playground, resume, siteDescription } = routes;
+  const { home, playground, resume, siteDescription, reddit } = routes;
   return (
     <BrowserRouter>
       <AppBar />
@@ -25,8 +26,8 @@ const Router = () => {
         <Route path={home.path}>
           <Home />
         </Route>
-        <Route path="/reddit">
-          <Home />
+        <Route path={reddit.path}>
+          <Reddit />
         </Route>
         <Route path="*">
           <Home />
